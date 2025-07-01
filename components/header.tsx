@@ -30,7 +30,13 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Image src="/agrinova-logo.png" alt="AgriNova" width={240} height={140} className="h-12 w-auto" />
+            <Image
+              src="/agrinova-logo.png"
+              alt="AgriNova"
+              width={240}
+              height={140}
+              className="h-12 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation */}
@@ -48,12 +54,12 @@ export function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              className="text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400"
+            <a
+              href="https://agrinova.site"
+              className="text-sm font-medium text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 transition"
             >
               Sign In
-            </Button>
+            </a>
             <WhatsAppButton />
           </div>
 
@@ -78,10 +84,15 @@ export function Header() {
                   </a>
                 ))}
                 <div className="flex flex-col space-y-2 pt-4">
-                  <Button variant="ghost" className="justify-start">
+                  <a
+                    href="https://agrinova.site"
+                    className="text-left text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 block px-4 py-2 transition"
+                  >
                     Sign In
+                  </a>
+                  <Button className="bg-green-600 hover:bg-green-700 text-white justify-start">
+                    Get Started
                   </Button>
-                  <Button className="bg-green-600 hover:bg-green-700 text-white justify-start">Get Started</Button>
                 </div>
               </div>
             </SheetContent>
