@@ -73,9 +73,9 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6"
             >
-              Helping Rural Farmers
+              Welcome To
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-                Make More
+                AgriNova!
               </span>
             </motion.h1>
 
