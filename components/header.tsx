@@ -35,7 +35,7 @@ export function Header() {
               alt="AgriNova"
               width={500}
               height={300}
-              className="h-12 w-auto"
+              className=""
             />
           </div>
 
