@@ -33,9 +33,9 @@ export function Header() {
             <Image
               src="/agrinova-logo.png"
               alt="AgriNova"
-              width={240}
-              height={140}
-              className="h-12 w-auto"
+              width={320}
+              height={160}
+              className="h-20 w-auto"
             />
           </div>
 
