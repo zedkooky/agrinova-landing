@@ -1,12 +1,10 @@
 "use client"
 
-import React from "react"
-
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { VideoModal } from "@/components/video-modal"
-import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, Play } from "lucide-react"
 
 const backgroundImages = [
@@ -22,37 +20,47 @@ export function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
 
-  // Auto-rotate background images
-  React.useEffect(() => {
+  // Auto-rotate background images every 3 seconds
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length)
     }, 3000)
     return () => clearInterval(interval)
   }, [])
 
+  // Preload all images to avoid flash
+  useEffect(() => {
+    backgroundImages.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
   return (
     <>
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image Carousel */}
+        {/* Background Image Layer */}
         <div className="absolute inset-0">
-          <AnimatePresence mode="wait">
+          {backgroundImages.map((img, index) => (
             <motion.div
-              key={currentImageIndex}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
               style={{
-                backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
+                backgroundImage: `url(${img})`,
+                zIndex: index === currentImageIndex ? 10 : 0,
               }}
             />
-          </AnimatePresence>
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-transparent to-emerald-900/20" />
+          ))}
         </div>
 
+        {/* Overlay Layers */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-transparent to-emerald-900/20" />
+
+        {/* Main Content */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-5xl mx-auto">
             {/* Badge */}
